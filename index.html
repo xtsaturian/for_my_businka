@@ -149,40 +149,58 @@
 
         /* ========== PHOTOS SECTION ========== */
         /* 📸 FOTKY — sem vlož obrázky */
-        .photos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            max-width: 640px;
-            width: 90vw;
-            margin-top: 1rem;
+        #slide-photos { overflow: hidden; }
+
+        .photos-scatter {
+            position: relative;
+            width: min(560px, 92vw);
+            height: 420px;
+            margin-top: 0.5rem;
         }
         .photo-frame {
-            aspect-ratio: 1;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 3px solid white;
-            box-shadow: 0 6px 20px rgba(219,39,119,0.15);
-            background: var(--pink-light);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.8rem; color: var(--text-soft);
-            transition: transform 0.3s;
+            position: absolute;
+            width: 160px;
+            background: white;
+            padding: 8px 8px 28px 8px;
+            box-shadow: 0 8px 28px rgba(100,30,60,0.18), 0 2px 6px rgba(219,39,119,0.10);
             cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s, z-index 0s;
+            z-index: 1;
         }
-        .photo-frame:hover { transform: scale(1.04) rotate(1deg); }
-        .photo-frame img {
-            width: 100%; height: 100%;
-            object-fit: cover;
+        .photo-frame:hover {
+            transform: scale(1.12) rotate(0deg) !important;
+            box-shadow: 0 18px 48px rgba(100,30,60,0.28);
+            z-index: 10;
         }
-        /* Placeholder štýl kým nie sú fotky */
+        /* 4 rozhádzané pozície + rotácie */
+        .photo-frame:nth-child(1) { top:  10px; left:  20px; transform: rotate(-6deg); }
+        .photo-frame:nth-child(2) { top:  0px;  left: 200px; transform: rotate(4deg); width:180px; }
+        .photo-frame:nth-child(3) { top: 200px; left:  40px; transform: rotate(3deg); }
+        .photo-frame:nth-child(4) { top: 190px; left: 220px; transform: rotate(-5deg); width:175px; }
+
+        .photo-inner {
+            width: 100%; aspect-ratio: 1;
+            background: var(--pink-light);
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .photo-inner img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-caption {
+            font-family: 'Dancing Script', cursive;
+            font-size: 0.85rem; color: var(--text-soft);
+            text-align: center; margin-top: 4px;
+            min-height: 1.1rem;
+        }
         .photo-placeholder {
-            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
             padding: 1rem;
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--text-soft);
+            width: 100%; aspect-ratio: 1;
+            background: var(--pink-light);
         }
-        .photo-placeholder span { font-size: 2rem; }
+        .photo-placeholder span { font-size: 1.8rem; }
 
         /* QUESTION */
         .question-text {
@@ -286,15 +304,12 @@
         #blow-btn:hover { transform: scale(1.05); }
         #blow-btn:active { transform: scale(0.97); }
 
-        /* FIREWORKS */
-        .firework-particle {
-            position: fixed; width: 8px; height: 8px; border-radius: 50%;
-            pointer-events: none; z-index: 999;
-            animation: fwFly linear forwards;
-        }
-        @keyframes fwFly {
-            0% { transform: translate(0,0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        /* FIREWORKS — canvas overlay */
+        #fwCanvas {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none; z-index: 997;
+            display: none;
         }
         .салют-text {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
@@ -350,6 +365,9 @@
 <button class="nav-arrow" id="btnPrev" onclick="goSlide(currentSlide-1)" style="display:none">← назад</button>
 <button class="nav-arrow" id="btnNext" onclick="goSlide(currentSlide+1)" style="display:none">дальше →</button>
 
+<!-- Fireworks canvas -->
+<canvas id="fwCanvas"></canvas>
+
 <!-- ===== SLIDESHOW ===== -->
 <div id="slideshow">
 
@@ -366,30 +384,42 @@
     <!-- ============================================================ -->
     <!-- 📸 ФОТОГРАФИИ — добавь свои фото сюда                       -->
     <!-- Замени div.photo-placeholder на: <img src="фото.jpg" alt=""> -->
-    <!-- Можешь добавить сколько угодно .photo-frame блоков           -->
+    <!-- Можешь менять .photo-caption текст под каждым фото           -->
     <!-- ============================================================ -->
     <div class="slide" id="slide-photos">
         <div class="section-title">Наши моменты 📸</div>
-        <div class="photos-grid">
+        <div class="photos-scatter">
 
-            <!-- ФОТО 1 — замени на <img src="путь/к/фото.jpg" alt=""> -->
+            <!-- ФОТО 1 — замени photo-placeholder на <img src="фото1.jpg" alt=""> -->
             <div class="photo-frame">
-                <div class="photo-placeholder"><span>🌸</span>Фото 1</div>
+                <div class="photo-inner">
+                    <div class="photo-placeholder"><span>🌸</span>Фото 1</div>
+                </div>
+                <div class="photo-caption">наш момент ✨</div>
             </div>
 
             <!-- ФОТО 2 -->
             <div class="photo-frame">
-                <div class="photo-placeholder"><span>💕</span>Фото 2</div>
+                <div class="photo-inner">
+                    <div class="photo-placeholder"><span>💕</span>Фото 2</div>
+                </div>
+                <div class="photo-caption">ты такая красивая 💗</div>
             </div>
 
             <!-- ФОТО 3 -->
             <div class="photo-frame">
-                <div class="photo-placeholder"><span>✨</span>Фото 3</div>
+                <div class="photo-inner">
+                    <div class="photo-placeholder"><span>✨</span>Фото 3</div>
+                </div>
+                <div class="photo-caption">любимая 🌸</div>
             </div>
 
             <!-- ФОТО 4 — можешь удалить или добавить ещё -->
             <div class="photo-frame">
-                <div class="photo-placeholder"><span>💗</span>Фото 4</div>
+                <div class="photo-inner">
+                    <div class="photo-placeholder"><span>💗</span>Фото 4</div>
+                </div>
+                <div class="photo-caption">навсегда 💕</div>
             </div>
 
         </div>
@@ -571,19 +601,30 @@
         setTimeout(()=>sp.remove(), 800);
     });
 
-    // Running NO button
+    // Running NO button — never overlaps YES
     let noClicks = 0;
     function runAway() {
         const btn = document.getElementById('btnNo');
+        const yes = document.querySelector('.btn-yes');
+        const yesRect = yes.getBoundingClientRect();
         const vw = window.innerWidth, vh = window.innerHeight;
-        const x = 40 + Math.random()*(vw - 160);
-        const y = 40 + Math.random()*(vh - 120);
+        const bw = btn.offsetWidth || 80, bh = btn.offsetHeight || 44;
+        let x, y, tries = 0;
+        do {
+            x = 30 + Math.random() * (vw - bw - 60);
+            y = 30 + Math.random() * (vh - bh - 60);
+            tries++;
+        } while (tries < 30 &&
+        x < yesRect.right + 20 && x + bw > yesRect.left - 20 &&
+        y < yesRect.bottom + 20 && y + bh > yesRect.top - 20);
         btn.style.position = 'fixed';
-        btn.style.left = x+'px'; btn.style.top = y+'px';
+        btn.style.left = x + 'px';
+        btn.style.top  = y + 'px';
+        btn.style.zIndex = 200;
         noClicks++;
-        if(noClicks>=3) btn.style.fontSize = '0.65rem';
-        if(noClicks>=6) btn.style.opacity = '0.3';
-        if(noClicks>=9) btn.style.display = 'none';
+        if(noClicks >= 3) btn.style.fontSize = '0.65rem';
+        if(noClicks >= 6) btn.style.opacity = '0.3';
+        if(noClicks >= 9) btn.style.display = 'none';
     }
 
     // Yes
@@ -628,45 +669,175 @@
         }, 1000);
     }
 
+    // ===== CANVAS FIREWORKS =====
+    const fwCanvas = document.getElementById('fwCanvas');
+    const fwCtx = fwCanvas.getContext('2d');
+    let fwActive = false;
+    let fwParticles = [];
+    let fwRockets = [];
+    let fwAnimId = null;
+
+    function resizeFwCanvas() {
+        fwCanvas.width = window.innerWidth;
+        fwCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeFwCanvas);
+    resizeFwCanvas();
+
+    const FW_COLORS = [
+        '#f472b6','#db2777','#fbbf24','#fb7185','#e879f9',
+        '#60a5fa','#34d399','#f9a8d4','#fde68a','#a78bfa',
+        '#ff6ef7','#00e5ff','#fff176','#ff8a65'
+    ];
+
+    class FwParticle {
+        constructor(x, y, color) {
+            this.x = x; this.y = y;
+            this.color = color;
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 2 + Math.random() * 5;
+            this.vx = Math.cos(angle) * speed;
+            this.vy = Math.sin(angle) * speed - 1;
+            this.gravity = 0.07;
+            this.life = 1;
+            this.decay = 0.012 + Math.random() * 0.015;
+            this.size = 2.5 + Math.random() * 2.5;
+            this.trail = [];
+            this.maxTrail = 8 + Math.floor(Math.random() * 8);
+            this.sparkle = Math.random() > 0.6; // some particles sparkle/twinkle
+        }
+        update() {
+            this.trail.push({x: this.x, y: this.y});
+            if(this.trail.length > this.maxTrail) this.trail.shift();
+            this.vx *= 0.97;
+            this.vy *= 0.97;
+            this.vy += this.gravity;
+            this.x += this.vx;
+            this.y += this.vy;
+            this.life -= this.decay;
+        }
+        draw(ctx) {
+            // Trail
+            for(let i = 0; i < this.trail.length; i++) {
+                const t = this.trail[i];
+                const alpha = (i / this.trail.length) * this.life * 0.6;
+                const r = this.size * (i / this.trail.length) * 0.7;
+                ctx.beginPath();
+                ctx.arc(t.x, t.y, Math.max(0.1, r), 0, Math.PI * 2);
+                ctx.fillStyle = this.color + Math.floor(alpha * 255).toString(16).padStart(2,'0');
+                ctx.fill();
+            }
+            // Head
+            const alpha = this.life;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.sparkle && Math.random() > 0.5 ? '#ffffff' : this.color;
+            ctx.globalAlpha = alpha;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+    }
+
+    class FwRocket {
+        constructor() {
+            this.x = window.innerWidth * (0.15 + Math.random() * 0.7);
+            this.y = window.innerHeight;
+            this.tx = window.innerWidth * (0.1 + Math.random() * 0.8);
+            this.ty = window.innerHeight * (0.05 + Math.random() * 0.5);
+            const dx = this.tx - this.x, dy = this.ty - this.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            const speed = 10 + Math.random() * 6;
+            this.vx = dx/dist * speed;
+            this.vy = dy/dist * speed;
+            this.trail = [];
+            this.done = false;
+            this.color = FW_COLORS[Math.floor(Math.random()*FW_COLORS.length)];
+        }
+        update() {
+            this.trail.push({x:this.x, y:this.y});
+            if(this.trail.length > 12) this.trail.shift();
+            this.x += this.vx; this.y += this.vy;
+            // Explode when near target
+            if(Math.abs(this.x-this.tx)<18 && Math.abs(this.y-this.ty)<18) {
+                this.done = true;
+                const count = 80 + Math.floor(Math.random()*60);
+                const baseColor = this.color;
+                for(let i=0;i<count;i++) {
+                    fwParticles.push(new FwParticle(this.x, this.y,
+                        Math.random()>0.2 ? baseColor : FW_COLORS[Math.floor(Math.random()*FW_COLORS.length)]
+                    ));
+                }
+                // Ring burst
+                for(let i=0;i<24;i++) {
+                    const angle = (i/24)*Math.PI*2;
+                    const p = new FwParticle(this.x, this.y, '#ffffff');
+                    const speed = 6 + Math.random()*3;
+                    p.vx = Math.cos(angle)*speed; p.vy = Math.sin(angle)*speed;
+                    p.size = 1.5; p.maxTrail = 5;
+                    fwParticles.push(p);
+                }
+            }
+        }
+        draw(ctx) {
+            for(let i=0;i<this.trail.length;i++) {
+                const t = this.trail[i];
+                const alpha = (i/this.trail.length)*0.8;
+                ctx.beginPath();
+                ctx.arc(t.x, t.y, 2.5*(i/this.trail.length), 0, Math.PI*2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = alpha;
+                ctx.fill();
+            }
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, 3, 0, Math.PI*2);
+            ctx.fillStyle = '#ffffff';
+            ctx.globalAlpha = 1;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+    }
+
+    function fwLoop() {
+        fwCtx.fillStyle = 'rgba(0,0,0,0.18)';
+        fwCtx.fillRect(0, 0, fwCanvas.width, fwCanvas.height);
+
+        fwRockets = fwRockets.filter(r => { r.update(); if(!r.done) r.draw(fwCtx); return !r.done; });
+        fwParticles = fwParticles.filter(p => { p.update(); if(p.life > 0) { p.draw(fwCtx); return true; } return false; });
+
+        if(fwActive || fwRockets.length > 0 || fwParticles.length > 0) {
+            fwAnimId = requestAnimationFrame(fwLoop);
+        } else {
+            fwCanvas.style.display = 'none';
+            fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+        }
+    }
+
     function launchСалют() {
-        // Big text
+        fwCanvas.style.display = 'block';
+        fwActive = true;
+        fwParticles = []; fwRockets = [];
+
         const txt = document.createElement('div');
         txt.className = 'салют-text';
         txt.textContent = '🎆 САЛЮТ! 🎆';
         document.body.appendChild(txt);
         setTimeout(()=>txt.remove(), 3000);
 
-        // Many firework bursts
-        const colors = ['#f472b6','#db2777','#fbbf24','#fb7185','#e879f9','#60a5fa','#34d399','#f9a8d4','#fde68a'];
-        for(let burst=0; burst<12; burst++) {
-            setTimeout(()=>{
-                const cx = Math.random()*window.innerWidth;
-                const cy = Math.random()*window.innerHeight*0.7;
-                for(let p=0; p<30; p++) {
-                    const el = document.createElement('div');
-                    el.className = 'firework-particle';
-                    const angle = (p/30)*360;
-                    const dist = 80 + Math.random()*120;
-                    const tx = Math.cos(angle*Math.PI/180)*dist;
-                    const ty = Math.sin(angle*Math.PI/180)*dist + 40;
-                    el.style.left = cx+'px'; el.style.top = cy+'px';
-                    el.style.background = colors[Math.floor(Math.random()*colors.length)];
-                    el.style.setProperty('--tx', tx+'px');
-                    el.style.setProperty('--ty', ty+'px');
-                    el.style.animationDuration = (0.6+Math.random()*0.8)+'s';
-                    el.style.width = el.style.height = (4+Math.random()*6)+'px';
-                    document.body.appendChild(el);
-                    setTimeout(()=>el.remove(), 1500);
-                }
-            }, burst*200);
-        }
-        // Repeat салют every 3s for 15s total
-        let rep = 0;
-        const repInt = setInterval(()=>{
-            rep++;
-            launchConfetti();
-            if(rep>=4) clearInterval(repInt);
-        }, 3000);
+        let rocketCount = 0;
+        const totalRockets = 30;
+        const rocketInterval = setInterval(() => {
+            // Launch 1-3 rockets at a time
+            const batch = 1 + Math.floor(Math.random()*2);
+            for(let b=0;b<batch;b++) fwRockets.push(new FwRocket());
+            rocketCount += batch;
+            if(rocketCount >= totalRockets) {
+                clearInterval(rocketInterval);
+                setTimeout(()=>{ fwActive = false; }, 4000);
+            }
+        }, 300);
+
+        if(!fwAnimId) fwLoop();
+        launchConfetti();
     }
 
     // Blow candles
