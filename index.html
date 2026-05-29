@@ -159,12 +159,12 @@
         .photo-frame {
             position: absolute;
             background: white;
-            padding: 10px 10px 36px 10px;
+            padding: 12px 12px 52px 12px;
             box-shadow: 0 10px 35px rgba(100,30,60,0.20), 0 2px 8px rgba(219,39,119,0.10);
             cursor: pointer;
             transition: transform 0.25s, box-shadow 0.25s;
             z-index: 2;
-            width: clamp(160px, 22vw, 240px);
+            width: clamp(260px, 36vw, 420px);
         }
         .photo-frame:hover {
             transform: scale(1.1) rotate(0deg) !important;
@@ -223,7 +223,7 @@
             margin-bottom: 2.5rem;
             max-width: 600px;
         }
-        .btn-group { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; position: relative; min-height: 60px; }
+        .btn-group { display: flex; flex-direction: column; align-items: center; gap: 1rem; position: relative; }
         .btn-yes, .btn-no {
             padding: 1rem 2.5rem;
             border: none; border-radius: 50px;
@@ -247,7 +247,7 @@
         .btn-no {
             background: white; color: var(--pink);
             border: 2px solid var(--pink-light);
-            position: absolute;
+            position: static;
             transition: none;
         }
         #yes-reaction { display: none; flex-direction: column; align-items: center; margin-top: 1.5rem; }
@@ -373,10 +373,6 @@
 
 <!-- NAV DOTS -->
 <div class="nav-dots" id="navDots"></div>
-
-<!-- PREV / NEXT arrows -->
-<button class="nav-arrow" id="btnPrev" onclick="goSlide(currentSlide-1)" style="display:none">← назад</button>
-<button class="nav-arrow" id="btnNext" onclick="goSlide(currentSlide+1)" style="display:none">дальше →</button>
 
 <!-- Fireworks canvas -->
 <canvas id="fwCanvas"></canvas>
@@ -576,16 +572,15 @@
 
         // Update dots
         document.querySelectorAll('.nav-dot').forEach((d,i) => d.classList.toggle('active', i===currentSlide));
-
-        // Show/hide arrows
-        document.getElementById('btnPrev').style.display = currentSlide > 0 ? '' : 'none';
-        document.getElementById('btnNext').style.display = currentSlide < SLIDE_COUNT-1 ? '' : 'none';
-
-        // Place NO button away from YES when entering question slide
-        if(SLIDE_IDS[currentSlide] === 'slide-question') {
-            setTimeout(placeNoBtn, 80);
-        }
     }
+
+    // Keyboard navigation — only forward (→ or Space or Enter)
+    document.addEventListener('keydown', function(e) {
+        if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            goSlide(currentSlide + 1);
+        }
+    });
 
     // Floating hearts
     const hb = document.getElementById('heartsBg');
@@ -612,8 +607,9 @@
         setTimeout(()=>sp.remove(), 800);
     });
 
-    // Running NO button — placed away from YES from the very first appearance
+    // Running NO button — starts in normal flow, flies away on first hover
     let noClicks = 0;
+    let noEscaped = false;
     function placeNoBtn() {
         const btn = document.getElementById('btnNo');
         const yes = document.querySelector('.btn-yes');
@@ -633,9 +629,14 @@
         btn.style.left = x + 'px';
         btn.style.top  = y + 'px';
         btn.style.zIndex = 200;
+        noEscaped = true;
     }
     function runAway() {
-        placeNoBtn();
+        if(!noEscaped) {
+            placeNoBtn();
+        } else {
+            placeNoBtn();
+        }
         noClicks++;
         const btn = document.getElementById('btnNo');
         if(noClicks >= 3) btn.style.fontSize = '0.65rem';
@@ -811,15 +812,14 @@
         setTimeout(()=>txt.remove(), 3000);
 
         let rocketCount = 0;
-        const totalRockets = 30;
+        const totalRockets = 55;
         const rocketInterval = setInterval(() => {
-            // Launch 1-3 rockets at a time
             const batch = 1 + Math.floor(Math.random()*2);
             for(let b=0;b<batch;b++) fwRockets.push(new FwRocket());
             rocketCount += batch;
             if(rocketCount >= totalRockets) {
                 clearInterval(rocketInterval);
-                setTimeout(()=>{ fwActive = false; }, 4000);
+                setTimeout(()=>{ fwActive = false; }, 8000);
             }
         }, 300);
 
@@ -861,7 +861,7 @@
                         fwParticles = []; fwRockets = [];
                         goSlide(5);
                     }, 900);
-                }, 6000);
+                }, 13000);
             }, 700);
         }, 900);
     }
@@ -886,9 +886,7 @@
         }
     }
 
-    // Init arrows
-    document.getElementById('btnPrev').style.display = 'none';
-    document.getElementById('btnNext').style.display = '';
+    // Nav dots are the only persistent navigation
 </script>
 </body>
 </html>
