@@ -365,6 +365,25 @@
         .final-hearts { font-size: 3rem; animation: heartBeat 1.5s infinite; }
         .final-msg { font-family: 'Dancing Script', cursive; font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--pink-deep); margin-top: 1rem; max-width: 500px; }
         .final-sub { font-size: 1rem; color: var(--text-soft); margin-top: 0.8rem; }
+        /* Press any key hint */
+        .key-hint {
+            position: absolute;
+            bottom: 1.4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--text-soft);
+            opacity: 0.35;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            pointer-events: none;
+            animation: hintPulse 3s ease-in-out infinite;
+            white-space: nowrap;
+        }
+        @keyframes hintPulse {
+            0%,100% { opacity: 0.2; }
+            50% { opacity: 0.45; }
+        }
     </style>
 </head>
 <body>
@@ -377,7 +396,7 @@
 <!-- Fireworks canvas -->
 <canvas id="fwCanvas"></canvas>
 <!-- Dark overlay for fireworks transition -->
-<div id="fwOverlay" style="display:none;position:fixed;inset:0;background:#0a0010;z-index:996;opacity:0;transition:opacity 0.8s;pointer-events:none;"></div>
+<div id="fwOverlay" style="display:none;position:fixed;inset:0;background:#0a0010;z-index:996;opacity:0;transition:opacity 2.2s;pointer-events:none;"></div>
 
 <!-- ===== SLIDESHOW ===== -->
 <div id="slideshow">
@@ -389,6 +408,7 @@
         <button onclick="goSlide(1)" style="margin-top:2.5rem; padding:1rem 2.5rem; background:linear-gradient(135deg,var(--pink),var(--pink-deep)); color:white; border:none; border-radius:50px; font-family:'Quicksand',sans-serif; font-size:1.1rem; font-weight:600; cursor:pointer; box-shadow:0 6px 20px rgba(219,39,119,0.35); animation:pulse 2s 1.5s infinite">
             Открыть 💕
         </button>
+        <div class="key-hint">нажми любую клавишу</div>
     </div>
 
     <!-- SLIDE 2: Photos -->
@@ -435,6 +455,7 @@
 
         </div>
         <!-- ============================================================ -->
+        <div class="key-hint">нажми любую клавишу</div>
     </div>
 
     <!-- SLIDE 3: Question -->
@@ -448,6 +469,7 @@
             <div class="yes-msg">Именно так! Я так и знала! 🥰</div>
             <div style="font-size:2.5rem; margin-top:0.5rem; animation:heartBeat 1s infinite">💗</div>
         </div>
+        <div class="key-hint">нажми любую клавишу</div>
     </div>
 
     <!-- SLIDE 4: Letter -->
@@ -485,6 +507,7 @@
             </div>
             <div class="letter-sig">С любовью, ты знаешь кто 💕</div>
         </div>
+        <div class="key-hint">нажми любую клавишу</div>
     </div>
 
     <!-- SLIDE 5: Cake -->
@@ -528,6 +551,7 @@
         </div>
 
         <button id="blow-btn" onclick="blowCandles()">💨 Задуть свечи!</button>
+        <div class="key-hint">нажми любую клавишу</div>
     </div>
 
     <!-- SLIDE 6: Final -->
@@ -860,7 +884,7 @@
                         fwActive = false;
                         fwParticles = []; fwRockets = [];
                         goSlide(5);
-                    }, 900);
+                    }, 2500);
                 }, 13000);
             }, 700);
         }, 900);
