@@ -74,6 +74,7 @@
 
         #slide-intro  { background: linear-gradient(160deg, #fff0f8 0%, #fce7f3 50%, #ffe4f0 100%); }
         #slide-photos { background: linear-gradient(160deg, #fff5fb, #fce7f3); }
+        #slide-photos2 { background: linear-gradient(160deg, #ffe9f5, #fde0ef); }
         #slide-question { background: #fff5fb; }
         #slide-letter { background: linear-gradient(160deg, #fdf2f8, #fff0f5); }
         #slide-cake   { background: linear-gradient(160deg, #fff5fb, #fce7f3); }
@@ -171,11 +172,11 @@
             box-shadow: 0 22px 55px rgba(100,30,60,0.30);
             z-index: 10;
         }
-        /* Positions spread across the full slide */
-        .photo-frame:nth-child(1) { top: 8%;  left: 5%;  transform: rotate(-7deg); }
-        .photo-frame:nth-child(2) { top: 5%;  right: 6%; transform: rotate(5deg); }
-        .photo-frame:nth-child(3) { bottom: 8%; left: 8%;  transform: rotate(4deg); }
-        .photo-frame:nth-child(4) { bottom: 6%; right: 5%; transform: rotate(-6deg); }
+        /* Positions spread across the full slide (page 1 only) */
+        .photos-scatter .photo-frame:nth-child(1) { top: 8%;  left: 5%;  transform: rotate(-7deg); }
+        .photos-scatter .photo-frame:nth-child(2) { top: 5%;  right: 6%; transform: rotate(5deg); }
+        .photos-scatter .photo-frame:nth-child(3) { bottom: 8%; left: 8%;  transform: rotate(4deg); }
+        .photos-scatter .photo-frame:nth-child(4) { bottom: 6%; right: 5%; transform: rotate(-6deg); }
 
         .photo-inner {
             width: 100%; aspect-ratio: 1;
@@ -201,7 +202,7 @@
         }
         .photo-placeholder span { font-size: 2.2rem; }
 
-        /* Slide title overlay for photos page */
+        /* Slide title overlay for photos page 1 (faint watermark behind scattered photos) */
         .photos-title-overlay {
             position: absolute;
             top: 50%; left: 50%;
@@ -213,6 +214,15 @@
             pointer-events: none;
             white-space: nowrap;
             z-index: 1;
+        }
+
+        /* Real title for photos page 2 (sits above the grid) */
+        .photos2-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: var(--pink-deep);
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
 
         /* QUESTION */
@@ -365,6 +375,38 @@
         .final-hearts { font-size: 3rem; animation: heartBeat 1.5s infinite; }
         .final-msg { font-family: 'Dancing Script', cursive; font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--pink-deep); margin-top: 1rem; max-width: 500px; }
         .final-sub { font-size: 1rem; color: var(--text-soft); margin-top: 0.8rem; }
+        /* Photos page 2 — clean 3x2 grid, 6 photos, no overlap */
+        #slide-photos2 {
+            overflow: hidden;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+        .photos-grid2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: clamp(1rem, 3vw, 2rem);
+            width: 100%;
+            max-width: 980px;
+            height: clamp(380px, 70vh, 560px);
+            margin: 0 auto;
+        }
+        .photos-grid2 .photo-frame {
+            position: static;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            transform: none !important;
+        }
+        .photos-grid2 .photo-frame:nth-child(1) { transform: rotate(-2deg) !important; }
+        .photos-grid2 .photo-frame:nth-child(2) { transform: rotate(1.5deg) !important; }
+        .photos-grid2 .photo-frame:nth-child(3) { transform: rotate(-1deg) !important; }
+        .photos-grid2 .photo-frame:nth-child(4) { transform: rotate(2deg) !important; }
+        .photos-grid2 .photo-frame:nth-child(5) { transform: rotate(-1.5deg) !important; }
+        .photos-grid2 .photo-frame:nth-child(6) { transform: rotate(1deg) !important; }
+        .photos-grid2 .photo-frame:hover { transform: scale(1.06) rotate(0deg) !important; }
+        .photos-grid2 .photo-inner { aspect-ratio: auto; height: calc(100% - 28px); }
+
         /* Press any key hint */
         .key-hint {
             position: absolute;
@@ -451,6 +493,69 @@
                     <div class="photo-placeholder"><span>💗</span>Фото 4</div>
                 </div>
                 <div class="photo-caption">навсегда 💕</div>
+            </div>
+
+        </div>
+        <!-- ============================================================ -->
+        <div class="key-hint">нажми любую клавишу</div>
+    </div>
+
+    <!-- SLIDE 2.5: Photos page 2 (continuation) -->
+    <!-- ============================================================ -->
+    <!-- 📸 ЕЩЁ ФОТОГРАФИИ — продолжение предыдущей страницы          -->
+    <!-- Замени div.photo-placeholder на: <img src="фото.jpg" alt=""> -->
+    <!-- Места под 6 фото: ФОТО 5, 6, 7, 8, 9, 10                     -->
+    <!-- ============================================================ -->
+    <div class="slide" id="slide-photos2">
+        <div class="photos2-title">и ещё немного... 💕</div>
+        <div class="photos-grid2">
+
+            <!-- ФОТО 5 -->
+            <div class="photo-frame">
+                <div class="photo-inner">
+                    <div class="photo-placeholder"><span>🌷</span>Фото 5</div>
+                </div>
+                <div class="photo-caption">помнишь это? 🥰</div>
+            </div>
+
+            <!-- ФОТО 6 -->
+            <div class="photo-frame">
+                <div class="photo-inner">
+                    <div class="photo-placeholder"><span>🎀</span>Фото 6</div>
+                </div>
+                <div class="photo-caption">мой любимый день 🌸</div>
+            </div>
+
+            <!-- ФОТО 7 -->
+            <div class="photo-frame">
+                <div class="photo-inner">
+                    <div class="photo-placeholder"><span>🦋</span>Фото 7</div>
+                </div>
+                <div class="photo-caption">улыбка, которую я люблю 💗</div>
+            </div>
+
+            <!-- ФОТО 8 -->
+            <div class="photo-frame">
+                <div class="photo-inner">
+                    <div class="photo-placeholder"><span>💞</span>Фото 8</div>
+                </div>
+                <div class="photo-caption">и так будет всегда ✨</div>
+            </div>
+
+            <!-- ФОТО 9 -->
+            <div class="photo-frame">
+                <div class="photo-inner">
+                    <div class="photo-placeholder"><span>🌼</span>Фото 9</div>
+                </div>
+                <div class="photo-caption">обожаю этот день 💛</div>
+            </div>
+
+            <!-- ФОТО 10 -->
+            <div class="photo-frame">
+                <div class="photo-inner">
+                    <div class="photo-placeholder"><span>🌺</span>Фото 10</div>
+                </div>
+                <div class="photo-caption">моя любимая 💖</div>
             </div>
 
         </div>
@@ -567,7 +672,7 @@
 </div><!-- /slideshow -->
 
 <script>
-    const SLIDE_IDS = ['slide-intro','slide-photos','slide-question','slide-letter','slide-cake','slide-final'];
+    const SLIDE_IDS = ['slide-intro','slide-photos','slide-photos2','slide-question','slide-letter','slide-cake','slide-final'];
     const SLIDE_COUNT = SLIDE_IDS.length;
     let currentSlide = 0;
 
@@ -672,7 +777,7 @@
     function clickYes() {
         document.getElementById('yes-reaction').classList.add('show');
         launchConfetti();
-        setTimeout(()=> goSlide(3), 1800);
+        setTimeout(()=> goSlide(SLIDE_IDS.indexOf('slide-letter')), 1800);
     }
 
     // Letter
@@ -883,7 +988,7 @@
                         fwCanvas.style.display = 'none';
                         fwActive = false;
                         fwParticles = []; fwRockets = [];
-                        goSlide(5);
+                        goSlide(SLIDE_IDS.indexOf('slide-final'));
                     }, 2500);
                 }, 13000);
             }, 700);
