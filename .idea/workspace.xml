@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72a397e7-723f-4584-a911-104559c64b25" name="Changes" comment="feat: second (fixed_3) version">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="72a397e7-723f-4584-a911-104559c64b25" name="Changes" comment="feat: third&#10;+ one page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +37,65 @@
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.000117097670816" />
+      <entry key="MS500" value="1.1636872944898204" />
+      <entry key="S2" value="1.8074712982218162" />
+      <entry key="S5" value="2.5821947591575993" />
+      <entry key="S10" value="3.136139822473166" />
+      <entry key="S30" value="3.6676257100245673" />
+      <entry key="S60" value="3.8274860259159986" />
+      <entry key="M2" value="3.9120964888549454" />
+      <entry key="M5" value="3.964434822707291" />
+      <entry key="M10" value="3.982149385280185" />
+      <entry key="M15" value="3.9880844186795974" />
+      <entry key="M30" value="3.9940346098888684" />
+      <entry key="H1" value="3.9970154025090467" />
+      <entry key="H2" value="3.9985072253237086" />
+      <entry key="H4" value="3.999253493638881" />
+      <entry key="D1" value="3.9998755657387592" />
+      <entry key="W1" value="3.999982223271997" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9660494378191192" />
+      <entry key="MS500" value="1.155645132583102" />
+      <entry key="S2" value="1.8022720724624475" />
+      <entry key="S5" value="2.57656861860244" />
+      <entry key="S10" value="3.1318534831287477" />
+      <entry key="S30" value="3.6657019524109185" />
+      <entry key="S60" value="3.8264481326344515" />
+      <entry key="M2" value="3.911557303975092" />
+      <entry key="M5" value="3.9642141253271297" />
+      <entry key="M10" value="3.9820381851413154" />
+      <entry key="M15" value="3.988010094977224" />
+      <entry key="M30" value="3.993997352631788" />
+      <entry key="H1" value="3.9969967499787287" />
+      <entry key="H2" value="3.9984978930768054" />
+      <entry key="H4" value="3.9992488260192056" />
+      <entry key="D1" value="3.9998747875942704" />
+      <entry key="W1" value="3.999982112103408" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6,
@@ -111,7 +168,7 @@
       <workItem from="1780046180506" duration="4640000" />
       <workItem from="1781109422430" duration="39000" />
       <workItem from="1782388673917" duration="1021000" />
-      <workItem from="1782550046741" duration="1067000" />
+      <workItem from="1782550046741" duration="3249000" />
     </task>
     <task id="LOCAL-00001" summary="feat: first version">
       <option name="closed" value="true" />
@@ -177,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780049313506</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat: third&#10;+ one page">
+      <option name="closed" value="true" />
+      <created>1782552263316</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1782552263316</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,7 +267,8 @@
     <MESSAGE value="feat: second (fixed) version" />
     <MESSAGE value="feat: second (fixed_2) version" />
     <MESSAGE value="feat: second (fixed_3) version" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: second (fixed_3) version" />
+    <MESSAGE value="feat: third&#10;+ one page" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: third&#10;+ one page" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
