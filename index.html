@@ -24,7 +24,6 @@
             background: var(--cream);
             color: var(--text);
             height: 100vh;
-            height: 100dvh;
             overflow: hidden;
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ctext y='16' font-size='16'%3E🌸%3C/text%3E%3C/svg%3E") 10 10, auto;
         }
@@ -46,7 +45,7 @@
 
         /* SLIDE SYSTEM */
         #slideshow {
-            width: 100%; height: 100vh; height: 100dvh;
+            width: 100%; height: 100vh;
             position: relative;
         }
 
@@ -93,10 +92,6 @@
             cursor: pointer; transition: all 0.2s;
         }
         .nav-dot.active { background: var(--pink-deep); transform: scale(1.4); }
-        @media (max-width: 600px) {
-            .nav-dots { gap: 13px; right: 0.8rem; }
-            .nav-dot { width: 10px; height: 10px; }
-        }
 
         /* NAV ARROWS */
         .nav-arrow {
@@ -170,7 +165,7 @@
             cursor: pointer;
             transition: transform 0.25s, box-shadow 0.25s;
             z-index: 2;
-            width: clamp(110px, 30vw, 320px);
+            width: clamp(200px, 26vw, 320px);
         }
         .photo-frame:hover {
             transform: scale(1.1) rotate(0deg) !important;
@@ -184,12 +179,12 @@
         .photos-scatter .photo-frame:nth-child(4) { bottom: 6%; right: 5%; transform: rotate(-6deg); }
 
         .photo-inner {
-            width: 100%;
+            width: 100%; aspect-ratio: 1;
             background: var(--pink-light);
             overflow: hidden;
             display: flex; align-items: center; justify-content: center;
         }
-        .photo-inner img { width: 100%; height: auto; display: block; }
+        .photo-inner img { width: 100%; height: 100%; object-fit: cover; }
         .photo-caption {
             font-family: 'Dancing Script', cursive;
             font-size: 0.9rem; color: var(--text-soft);
@@ -384,18 +379,18 @@
         #slide-photos2 {
             overflow: hidden;
             display: flex; flex-direction: column;
-            align-items: center; justify-content: flex-start;
-            padding: 1rem 1rem 0.5rem;
-            gap: 0.6rem;
+            align-items: center; justify-content: center;
+            padding: 1.2rem 1rem;
+            gap: 0.8rem;
         }
         .photos-grid2 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(2, 1fr);
-            gap: clamp(0.5rem, 1.2vw, 0.9rem);
+            gap: clamp(0.6rem, 1.6vw, 1.2rem);
             width: 100%;
             max-width: 900px;
-            height: min(62vh, 480px);
+            height: min(72vh, 560px);
             margin: 0 auto;
         }
         .photos-grid2 .photo-frame {
@@ -415,7 +410,6 @@
         .photos-grid2 .photo-frame:nth-child(6) { transform: rotate(1deg) !important; }
         .photos-grid2 .photo-frame:hover { transform: scale(1.06) rotate(0deg) !important; }
         .photos-grid2 .photo-inner { aspect-ratio: auto; flex: 1; min-height: 0; width: 100%; }
-        .photos-grid2 .photo-inner img { width: 100%; height: 100%; object-fit: contain; }
         .photos-grid2 .photo-caption { font-size: 0.75rem; margin-top: 4px; flex-shrink: 0; }
 
         /* Photos page 3 — 5 photos, clean responsive row/wrap layout */
@@ -437,7 +431,7 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: flex-start;
-            gap: clamp(0.9rem, 2.2vw, 1.6rem);
+            gap: clamp(0.6rem, 1.6vw, 1.2rem);
             max-width: 1100px;
             max-height: 75vh;
             overflow: hidden;
@@ -449,12 +443,12 @@
             margin: 0;
             padding: 8px 8px 26px 8px;
         }
-        .photos-row3 .photo-frame:nth-child(1) { transform: rotate(-5deg) translateY(10px) !important; }
-        .photos-row3 .photo-frame:nth-child(2) { transform: rotate(4deg) translateY(-12px) !important; }
-        .photos-row3 .photo-frame:nth-child(3) { transform: rotate(-3deg) translateY(14px) !important; }
-        .photos-row3 .photo-frame:nth-child(4) { transform: rotate(5deg) translateY(-10px) !important; }
-        .photos-row3 .photo-frame:nth-child(5) { transform: rotate(-4deg) translateY(8px) !important; }
-        .photos-row3 .photo-frame:hover { transform: scale(1.08) rotate(0deg) translateY(0) !important; }
+        .photos-row3 .photo-frame:nth-child(1) { transform: rotate(-4deg) !important; }
+        .photos-row3 .photo-frame:nth-child(2) { transform: rotate(3deg) !important; }
+        .photos-row3 .photo-frame:nth-child(3) { transform: rotate(-2deg) !important; }
+        .photos-row3 .photo-frame:nth-child(4) { transform: rotate(4deg) !important; }
+        .photos-row3 .photo-frame:nth-child(5) { transform: rotate(-3deg) !important; }
+        .photos-row3 .photo-frame:hover { transform: scale(1.08) rotate(0deg) !important; }
 
         /* Press any key hint */
         .key-hint {
@@ -814,30 +808,6 @@
             goSlide(currentSlide - 1);
         }
     });
-
-    // Touch swipe navigation (mobile) — swipe left = next, swipe right = back
-    (function() {
-        let touchStartX = 0, touchStartY = 0;
-        document.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].clientX;
-            touchStartY = e.changedTouches[0].clientY;
-        }, { passive: true });
-        document.addEventListener('touchend', function(e) {
-            const dx = e.changedTouches[0].clientX - touchStartX;
-            const dy = e.changedTouches[0].clientY - touchStartY;
-            // Ignore mostly-vertical swipes (likely scrolling inside a slide)
-            if(Math.abs(dx) < 55 || Math.abs(dx) < Math.abs(dy) * 1.3) return;
-            if(dx < 0) goSlide(currentSlide + 1);
-            else goSlide(currentSlide - 1);
-        }, { passive: true });
-    })();
-
-    // On touch devices, swap the "press any key" hint for a touch-friendly one
-    if('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        document.querySelectorAll('.key-hint').forEach(el => {
-            el.textContent = 'свайпни или нажми →';
-        });
-    }
 
     // Floating hearts
     const hb = document.getElementById('heartsBg');
