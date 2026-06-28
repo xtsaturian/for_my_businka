@@ -17,6 +17,8 @@
             --text-soft: #c084aa;
         }
 
+        html { overflow: hidden; height: 100%; width: 100%; }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -24,6 +26,7 @@
             background: var(--cream);
             color: var(--text);
             height: 100vh;
+            height: 100dvh;
             overflow: hidden;
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ctext y='16' font-size='16'%3E🌸%3C/text%3E%3C/svg%3E") 10 10, auto;
         }
@@ -43,8 +46,9 @@
         }
 
         #slideshow {
-            width: 100%; height: 100vh;
+            width: 100%; height: 100vh; height: 100dvh;
             position: relative;
+            overflow: hidden;
         }
 
         .slide {
@@ -89,6 +93,10 @@
             cursor: pointer; transition: all 0.2s;
         }
         .nav-dot.active { background: var(--pink-deep); transform: scale(1.4); }
+        @media (max-width: 600px) {
+            .nav-dots { gap: 13px; right: 0.8rem; }
+            .nav-dot { width: 10px; height: 10px; }
+        }
 
         .nav-arrow {
             position: fixed; bottom: 2rem; z-index: 100;
@@ -158,7 +166,7 @@
             cursor: pointer;
             transition: transform 0.25s, box-shadow 0.25s;
             z-index: 2;
-            width: clamp(200px, 26vw, 320px);
+            width: clamp(110px, 30vw, 320px);
         }
         .photo-frame:hover {
             transform: scale(1.1) rotate(0deg) !important;
@@ -179,7 +187,7 @@
         .photo-inner img { width: 100%; height: auto; display: block; }
         .photo-caption {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.15rem; color: var(--text-soft);
+            font-size: clamp(0.8rem, 3.2vw, 1.05rem); color: var(--text-soft);
             text-align: center; margin-top: 6px;
             min-height: 1.2rem;
         }
@@ -288,6 +296,14 @@
             margin-top: 1rem;
         }
         .letter-sig { font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: var(--pink-deep); text-align: right; margin-top: 1.5rem; }
+        .letter-scroll-fade {
+            position: sticky;
+            bottom: -1px;
+            height: 28px;
+            margin-top: -28px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.95));
+            pointer-events: none;
+        }
 
         .cake-wrap { position: relative; display: inline-block; }
         .cake-svg { width: 240px; filter: drop-shadow(0 10px 25px rgba(219,39,119,0.2)); }
@@ -388,7 +404,7 @@
         .photos-grid2 .photo-frame:nth-child(5) { transform: rotate(-1.5deg) !important; }
         .photos-grid2 .photo-frame:nth-child(6) { transform: rotate(1deg) !important; }
         .photos-grid2 .photo-frame:hover { transform: scale(1.06) rotate(0deg) !important; }
-        .photos-grid2 .photo-caption { font-size: 1rem; margin-top: 4px; }
+        .photos-grid2 .photo-caption { font-size: clamp(0.75rem, 3vw, 1rem); margin-top: 4px; }
 
         #slide-photos3 {
             overflow: hidden;
@@ -408,15 +424,15 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: flex-start;
-            gap: clamp(0.9rem, 2.2vw, 1.6rem);
+            gap: clamp(0.6rem, 1.6vw, 1.4rem);
             max-width: 1100px;
-            max-height: 75vh;
-            overflow: hidden;
-            padding: 0 1rem;
+            max-height: 85vh;
+            overflow: visible;
+            padding: 0 0.5rem;
         }
         .photos-row3 .photo-frame {
             position: static;
-            width: clamp(120px, 16vw, 190px);
+            width: clamp(80px, 15vw, 190px);
             margin: 0;
             padding: 8px 8px 26px 8px;
         }
@@ -638,13 +654,14 @@
             <div style="font-family:'Dancing Script',cursive; font-size:1.4rem; color:var(--pink-deep); margin-bottom:0.5rem;">Моему сокровищу,</div>
             <div class="letter-lines" id="letterLines">
                 <div class="letter-placeholder">
-                    Моя любимая муся! С днем рождения тебя, моя девочка. Пропущу все формальности, ты и так всё знаешь. Спасибо, что весь этот период ты рядом, поддерживаешь меня и не даешь в себе сомневаться. Я тебя очень ценю, моя бусинка пребусинка. Знай, что я тоже всегда рядом с тобой.<br><br>
-
-                    Я тебе желаю сегодня повеселиться хорошенько, ведь ты этого заслуживаешь! Удачи в твоих начинаниях, в которых я свою умничку всегда поддержу. Никогда не стесняйся обратиться за помощью, а то ты часто любишь взваливать многое на себя. От всех монстлов тебя твой муся защитит.<br><br>
-
-                    Я тебя очень сильно люблюблю, моя маленькая принцесса. Вшак за это время мы очень друг к другу привязались, и нас так просто уже не разлучить. Даже через километры я буду всегда с тобой. Ты так много для меня делаешь, мое солнышко, что не передать словами, как я тебе благодарен. Поэтому я изо всех сил постараюсь, чтобы в свой день рождения ты не грустила. Наслаждайся, моя звездочка, это твой день 💗</div>
+                    Моя любимая муся! С днем рождения тебя, моя девочка! Пропущу все формальности — ты и так всё прекрасно знаешь. Спасибо тебе огромное, что весь этот период ты рядом со мной: поддерживаешь в трудные минуты и не даешь сомневаться в себе. Я невероятно ценю тебя, моя бусинка пребусинка, и знай — я тоже всегда-всегда рядом.
+<br><br>
+                    Сегодня я желаю тебе от души повеселиться и оторваться хорошенько, ведь ты этого заслуживаешь как никто другой! Удачи тебе во всех-всех начинаниях, а я свою умничку обязательно во всём поддержу. И пожалуйста, никогда не стесняйся просить о помощи, ведь ты так любишь взваливать всё на свои плечи. Не переживай, от всех монстлов тебя твой муся точно защитит!
+                    <br><br>
+                    Я тебя очень сильно люблюблю, моя маленькая принцесса. Вшак за всё это время мы так сильно привязались друг к другу, что нас теперь ни за что не разлучить. Даже через любые километры я всегда буду с тобой. Моё солнышко, ты делаешь для меня так много, что мне просто не хватит слов, чтобы выразить всю свою благодарность. Поэтому я изо всех сил постараюсь, чтобы в свой праздник ты ни капельки не грустила. Наслаждайся, моя звездочка, это полностью твой день 💗</div>
             </div>
             <div class="letter-sig">С любовью, ты знаешь кто 💕</div>
+            <div class="letter-scroll-fade"></div>
         </div>
         <div class="key-hint">нажми любую клавишу</div>
     </div>
@@ -747,6 +764,28 @@
             goSlide(currentSlide - 1);
         }
     });
+
+    // Touch swipe navigation (mobile) — swipe left = next, swipe right = back
+    (function() {
+        let touchStartX = 0, touchStartY = 0;
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].clientX;
+            touchStartY = e.changedTouches[0].clientY;
+        }, { passive: true });
+        document.addEventListener('touchend', function(e) {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            if(Math.abs(dx) < 55 || Math.abs(dx) < Math.abs(dy) * 1.3) return;
+            if(dx < 0) goSlide(currentSlide + 1);
+            else goSlide(currentSlide - 1);
+        }, { passive: true });
+    })();
+
+    if('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.querySelectorAll('.key-hint').forEach(el => {
+            el.textContent = 'свайпни или нажми →';
+        });
+    }
 
     // Floating hearts
     const hb = document.getElementById('heartsBg');
