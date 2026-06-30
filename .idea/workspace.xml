@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72a397e7-723f-4584-a911-104559c64b25" name="Changes" comment="FINAL2">
+    <list default="true" id="72a397e7-723f-4584-a911-104559c64b25" name="Changes" comment="feat: oprava slova">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,23 +40,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0000000000024243" />
-      <entry key="S30" value="1.0003319638295045" />
-      <entry key="S60" value="1.0397985534808694" />
-      <entry key="M2" value="1.4679986274050676" />
-      <entry key="M5" value="3.309538287937373" />
-      <entry key="M10" value="8.312023501096027" />
-      <entry key="M15" value="20.069569251030433" />
-      <entry key="M30" value="71.1832772732293" />
-      <entry key="H1" value="147.46167351711748" />
-      <entry key="H2" value="215.6296984476162" />
-      <entry key="H4" value="261.6016279821658" />
-      <entry key="D1" value="307.7791318106265" />
-      <entry key="W1" value="316.5183615395329" />
+      <entry key="MS100" value="1.0000218816263164" />
+      <entry key="MS500" value="1.139331813124384" />
+      <entry key="S2" value="2.462522727882452" />
+      <entry key="S5" value="3.9118464786350144" />
+      <entry key="S10" value="4.780010064481969" />
+      <entry key="S30" value="5.557099443253466" />
+      <entry key="S60" value="6.051686035893604" />
+      <entry key="M2" value="7.362349296119511" />
+      <entry key="M5" value="10.758761148440987" />
+      <entry key="M10" value="16.167962977754286" />
+      <entry key="M15" value="26.67108837264997" />
+      <entry key="M30" value="74.61152471943093" />
+      <entry key="H1" value="150.65783075789082" />
+      <entry key="H2" value="221.17120228250766" />
+      <entry key="H4" value="269.6719781233448" />
+      <entry key="D1" value="319.00618685506424" />
+      <entry key="W1" value="328.40473978631405" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -79,23 +78,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.15712667181522852" />
-      <entry key="MS500" value="0.6906372240719284" />
-      <entry key="S2" value="0.9116171683298027" />
-      <entry key="S5" value="0.9636625866956605" />
-      <entry key="S10" value="0.981663173751708" />
-      <entry key="S30" value="0.9941768638406092" />
-      <entry key="S60" value="1.0363750244530054" />
-      <entry key="M2" value="1.4644100116240333" />
-      <entry key="M5" value="3.30518383954692" />
-      <entry key="M10" value="8.306127177588163" />
-      <entry key="M15" value="20.059614267024585" />
-      <entry key="M30" value="71.16494770454317" />
-      <entry key="H1" value="147.44247336865146" />
-      <entry key="H2" value="215.61560730234822" />
-      <entry key="H4" value="261.59306791652875" />
-      <entry key="D1" value="307.77745164479495" />
-      <entry key="W1" value="316.51811466381565" />
+      <entry key="MS100" value="0.9659574651907272" />
+      <entry key="MS500" value="1.1314827324902925" />
+      <entry key="S2" value="2.4583173278325403" />
+      <entry key="S5" value="3.9091564893368305" />
+      <entry key="S10" value="4.77836043812016" />
+      <entry key="S30" value="5.55641507919445" />
+      <entry key="S60" value="6.050619011261571" />
+      <entry key="M2" value="7.359767591366849" />
+      <entry key="M5" value="10.754506867998655" />
+      <entry key="M10" value="16.162347975617017" />
+      <entry key="M15" value="26.66212758635042" />
+      <entry key="M30" value="74.59462450137845" />
+      <entry key="H1" value="150.63940763283097" />
+      <entry key="H2" value="221.1573538380128" />
+      <entry key="H4" value="269.6634583261208" />
+      <entry key="D1" value="319.00449638131687" />
+      <entry key="W1" value="328.4044909286132" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -171,7 +170,7 @@
       <workItem from="1782388673917" duration="1021000" />
       <workItem from="1782550046741" duration="3249000" />
       <workItem from="1782559616562" duration="2731000" />
-      <workItem from="1782630046718" duration="463000" />
+      <workItem from="1782630046718" duration="1606000" />
     </task>
     <task id="LOCAL-00001" summary="feat: first version">
       <option name="closed" value="true" />
@@ -301,7 +300,23 @@
       <option name="project" value="LOCAL" />
       <updated>1782605212930</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="FINAL + mobil">
+      <option name="closed" value="true" />
+      <created>1782630561488</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1782630561488</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: oprava slova">
+      <option name="closed" value="true" />
+      <created>1782630822971</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1782630822971</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,7 +345,9 @@
     <MESSAGE value="feat: fifth&#10;&#10;for mobile" />
     <MESSAGE value="FINAL" />
     <MESSAGE value="FINAL2" />
-    <option name="LAST_COMMIT_MESSAGE" value="FINAL2" />
+    <MESSAGE value="FINAL + mobil" />
+    <MESSAGE value="feat: oprava slova" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: oprava slova" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
